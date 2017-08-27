@@ -11,15 +11,17 @@ var requestHandler = function (request, response) {
 
     var parsedUrl = url.parse(request.url);
 
-    response.setHeader('Content-Type', 'application/json');
-
     if (request.method == 'GET' && parsedUrl.pathname == '/listings') {
+        response.setHeader('Content-Type', 'application/json');
+
         response.statusCode = 200;
         response.end(JSON.stringify(listingData));
 
         console.log('Sending 200');
     }
     else {
+        response.setHeader('Content-Type', 'text/plain');
+
         response.statusCode = 404;
         response.write('Bad gateway error');
         response.end();
